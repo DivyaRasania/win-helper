@@ -1,7 +1,11 @@
 @echo off
 
+REM repair file or system image corruptions
+sfc /scannow
+DISM /Online /Cleanup-Image /RestoreHealth
+
 REM updates all softwares
-winget upgrade -u -r -h --include-unknown --accept-package-agreements --force --disable-interactivity
+winget upgrade --silent --accept-package-agreements --accept-source-agreements --all --include-unknown --uninstall-previous --force --disable-interactivity
 
 REM opens disk cleaner
 cleanmgr
@@ -18,4 +22,3 @@ ipconfig /renew
 
 REM restarts the computer for fresh start
 shutdown /r /t 30 /c "Your computer will restart in 30 seconds. Please save all your files in that time."
-
