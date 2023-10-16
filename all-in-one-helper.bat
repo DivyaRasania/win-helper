@@ -37,6 +37,6 @@ ipconfig /release
 ipconfig /renew
 ipconfig /flushdns
 
-REM restarts the computer for fresh start
-echo "==========Restaring your pc=========="
-shutdown /r /t 30 /c "Your computer will restart in 30 seconds. Please save all your files in that time."
+REM shutsdown the computer for fresh start
+echo "==========Shutting down your pc=========="
+SlideToShutdown
