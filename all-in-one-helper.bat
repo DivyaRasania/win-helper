@@ -17,7 +17,7 @@ DISM /Online /Cleanup-Image /RestoreHealth
 
 REM updates all softwares
 echo "==========Starting software updates=========="
-winget upgrade --include-unknown --all --accept-package-agreements --accept-source-agreements --force --silent --disable-interactivity
+winget upgrade --include-unknown --all --accept-package-agreements --accept-source-agreements --force --silent
 
 REM opens disk cleaner
 echo "==========Starting disk cleaner=========="
