@@ -42,17 +42,9 @@ Start-Process -FilePath "cleanmgr.exe"
 
 # Delete temporary files and battery report
 Write-Host "========== Removing temp files =========="
-# Automatically retrieve path to user's temporary files
-$tempPath = "$env:userprofile\AppData\Local\Temp"
-
-# Delete user's temp files
-Remove-Item -Path $tempPath -Force -Recurse -Quiet
-
-# Delete other temporary directories
+Remove-Item -Path "env:userprofile\AppData\Local\Temp" -Force -Recurse -Quiet
 Remove-Item -Path "C:\Windows\Temp\*" -Force -Recurse -Quiet
 Remove-Item -Path "C:\Windows\Prefetch\*" -Force -Recurse -Quiet
-
-# Delete battery report
 Remove-Item -Path "$env:userprofile\Desktop\battery-report.html" -Force -Recurse -Quiet
 
 # Refresh network settings
@@ -64,5 +56,4 @@ ipconfig /flushdns
 
 # Restart computer with message
 Write-Host "========== Restarting your PC... =========="
-$restartMessage = "Your PC is about to restart in 30 seconds. Please save your work."
-Restart-Computer -ComputerName . -Force -Message $restartMessage
+Restart-Computer -ComputerName . -Force -Message "Your PC is about to restart in 30 seconds. Please save your work."
