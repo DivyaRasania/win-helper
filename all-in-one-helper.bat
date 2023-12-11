@@ -3,6 +3,16 @@
 REM Script created by Divya Rasania
 REM This script performs various system maintenance tasks and restarts the computer.
 
+REM Check if already running as administrator
+if "%username%"=="administrator" goto start
+
+REM Elevate script with runas
+runas /user:administrator /savecred %0
+
+goto end
+
+:start
+
 REM Output battery report to desktop
 echo "========== Outputing battery report =========="
 powercfg /batteryreport /output "%userprofile%\Desktop\battery-report.html"
@@ -41,3 +51,5 @@ ipconfig /flushdns
 REM Restart computer with message
 echo "========== Restarting your PC... =========="
 shutdown -r -t 30 -c "Your PC is about to restart in 30 seconds. Please save your work."
+
+:end
