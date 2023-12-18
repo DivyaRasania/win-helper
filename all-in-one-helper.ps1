@@ -56,4 +56,4 @@ ipconfig /flushdns
 
 # Restart computer with message
 Write-Host "========== Restarting your PC... =========="
-Restart-Computer -ComputerName . -Force -Message "Your PC is about to restart in 30 seconds. Please save your work."
+shutdown -r -t 30 -c "Your PC is about to restart in 30 seconds. Please save your work."
