@@ -42,7 +42,7 @@ Start-Process -FilePath "cleanmgr.exe"
 
 # Delete temporary files and battery report
 Write-Host "========== Removing temp files =========="
-Remove-Item -Path "env:userprofile\AppData\Local\Temp" -Force -Recurse -Quiet
+Remove-Item -Path "$env:userprofile\AppData\Local\Temp" -Force -Recurse -Quiet
 Remove-Item -Path "C:\Windows\Temp\*" -Force -Recurse -Quiet
 Remove-Item -Path "C:\Windows\Prefetch\*" -Force -Recurse -Quiet
 Remove-Item -Path "$env:userprofile\Desktop\battery-report.html" -Force -Recurse -Quiet
