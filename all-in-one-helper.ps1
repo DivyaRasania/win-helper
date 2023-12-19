@@ -29,7 +29,7 @@ Start-Process -FilePath "msedge" -ArgumentList "$env:userprofile\Desktop\battery
 
 # Repair file or system image corruptions
 Write-Host "========== Starting system repairs =========="
-runas /user:administrator /savecred sfc /scannow
+sfc /scannow
 DISM /Online /Cleanup-Image /RestoreHealth
 
 # Update all softwares
