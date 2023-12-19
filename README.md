@@ -14,3 +14,5 @@ This script gives you your:
 
 Open powershell and run ```irm bit.ly/divs-help | iex```.
 Note: If you run this script without admin, it will grant you access to run it as admin.
+
+You can also download the bat file to save it on computer and run it manually. Just remember to run it as admin.
