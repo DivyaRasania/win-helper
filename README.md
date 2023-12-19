@@ -1,4 +1,4 @@
-### Note: This script works best on windows 10 and 11.
+### Note: This script works best on Windows 10 and 11.
 
 # Description
 
