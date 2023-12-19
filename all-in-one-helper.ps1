@@ -42,10 +42,12 @@ Start-Process -FilePath "cleanmgr.exe"
 
 # Delete temporary files and battery report
 Write-Host "========== Removing temp files =========="
-Remove-Item -Path "$env:userprofile\AppData\Local\Temp" -Force -Recurse -Quiet
-Remove-Item -Path "C:\Windows\Temp\*" -Force -Recurse -Quiet
-Remove-Item -Path "C:\Windows\Prefetch\*" -Force -Recurse -Quiet
-Remove-Item -Path "$env:userprofile\Desktop\battery-report.html" -Force -Recurse -Quiet
+$paths = @("$env:localappdata\Temp", "C:\Windows\Temp", "C:\Windows\Prefetch")
+foreach ($path in $paths) {
+    if (Test-Path $path) {
+        Get-ChildItem -Path $path -Recurse | Remove-Item -Force -Recurse -ErrorAction SilentlyContinue
+    }
+}
 
 # Refresh network settings
 Write-Host "========== Refreshing networks =========="
