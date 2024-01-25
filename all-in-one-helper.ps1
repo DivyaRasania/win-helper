@@ -44,18 +44,9 @@ Start-Process -FilePath "cleanmgr.exe"
 Write-Host "========== Removing temp files =========="
 try {
     rm -Force -Recurse -Confirm:$false "$env:localappdata\Temp"
-} catch {
-    Write-Host "Some files and folders are left untouched as those cannot be deleted"
-}
-
-try {
     rm -Force -Recurse -Confirm:$false "C:\Windows\Temp"
-} catch {
-    Write-Host "Some files and folders are left untouched as those cannot be deleted"
-}
-
-try {
     rm -Force -Recurse -Confirm:$false "C:\Windows\Prefetch"
+    rm "$env:userprofile\Desktop\battery-report.html"
 } catch {
     Write-Host "Some files and folders are left untouched as those cannot be deleted"
 }
