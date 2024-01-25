@@ -42,11 +42,22 @@ Start-Process -FilePath "cleanmgr.exe"
 
 # Delete temporary files and battery report
 Write-Host "========== Removing temp files =========="
-$paths = @("$env:localappdata\Temp", "C:\Windows\Temp", "C:\Windows\Prefetch")
-foreach ($path in $paths) {
-    if (Test-Path $path) {
-        Get-ChildItem -Path $path -Recurse | Remove-Item -Force -Recurse -ErrorAction SilentlyContinue
-    }
+try {
+    rm -Force -Recurse -Confirm:$false "$env:localappdata\Temp"
+} catch {
+    Write-Host "Some files and folders are left untouched as those cannot be deleted"
+}
+
+try {
+    rm -Force -Recurse -Confirm:$false "C:\Windows\Temp"
+} catch {
+    Write-Host "Some files and folders are left untouched as those cannot be deleted"
+}
+
+try {
+    rm -Force -Recurse -Confirm:$false "C:\Windows\Prefetch"
+} catch {
+    Write-Host "Some files and folders are left untouched as those cannot be deleted"
 }
 
 # Refresh network settings
