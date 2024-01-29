@@ -38,7 +38,7 @@ winget upgrade --all
 
 # Open Disk Cleanup
 Write-Host "========== Starting Disk Cleanup =========="
-Start-Process -FilePath "cleanmgr.exe"
+Start-Process -FilePath "cleanmgr.exe" -Wait
 
 # Delete temporary files and battery report
 Write-Host "========== Removing temp files =========="
