@@ -34,7 +34,7 @@ DISM /Online /Cleanup-Image /RestoreHealth
 
 # Update all softwares
 Write-Host "========== Starting software updates =========="
-winget upgrade --all
+winget upgrade --all --include-unknown
 
 # Open Disk Cleanup
 Write-Host "========== Starting Disk Cleanup =========="
