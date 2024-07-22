@@ -5,13 +5,10 @@ $currentPid = [System.Security.Principal.WindowsIdentity]::GetCurrent()
 $principal = new-object System.Security.Principal.WindowsPrincipal($currentPid)
 $adminRole=[System.Security.Principal.WindowsBuiltInRole]::Administrator
 
-if ($principal.IsInRole($adminRole))
-{
+if ($principal.IsInRole($adminRole)) {
     $Host.UI.RawUI.WindowTitle = $myInvocation.MyCommand.Definition + "(Admin)"
     clear-host
-}
-else
-{
+} else {
     $newProcess = new-object System.Diagnostics.ProcessStartInfo "PowerShell";
     $newProcess.Arguments = $myInvocation.MyCommand.Definition;
     $newProcess.Verb = "runas";
@@ -19,13 +16,15 @@ else
     break
 }
 
-# Output battery report to desktop
-Write-Host "========== Outputing battery report =========="
-powercfg /batteryreport /output "$env:userprofile\Desktop\battery-report.html"
+if ((Get-Computerinfo).CsPCSystemType -eq "Mobile") {
+    # Output battery report to desktop
+    Write-Host "========== Outputing battery report =========="
+    powercfg /batteryreport /output "$env:userprofile\Desktop\battery-report.html"
 
-# Open battery report
-Write-Host "========== Opening battery report =========="
-Start-Process -FilePath "msedge" -ArgumentList "$env:userprofile\Desktop\battery-report.html"
+    # Open battery report
+    Write-Host "========== Opening battery report =========="
+    Start-Process -FilePath "msedge" -ArgumentList "$env:userprofile\Desktop\battery-report.html"
+}
 
 # Repair file or system image corruptions
 Write-Host "========== Starting system repairs =========="
@@ -43,10 +42,10 @@ Start-Process -FilePath "cleanmgr.exe" -Wait
 # Delete temporary files and battery report
 Write-Host "========== Removing temp files =========="
 try {
-    rm -Force -Recurse -Confirm:$false "$env:localappdata\Temp"
-    rm -Force -Recurse -Confirm:$false "C:\Windows\Temp"
-    rm -Force -Recurse -Confirm:$false "C:\Windows\Prefetch"
-    rm "$env:userprofile\Desktop\battery-report.html"
+    Remove-Item -Force -Recurse -Confirm:$false "$env:localappdata\Temp"
+    Remove-Item -Force -Recurse -Confirm:$false "C:\Windows\Temp"
+    Remove-Item -Force -Recurse -Confirm:$false "C:\Windows\Prefetch"
+    Remove-Item "$env:userprofile\Desktop\battery-report.html"
 } catch {
     Write-Host "Some files and folders are left untouched as those cannot be deleted"
 }
@@ -58,6 +57,8 @@ ipconfig /release
 ipconfig /renew
 ipconfig /flushdns
 
-# Restart computer with message
+# Message to restart the computer
 Write-Host "========== Restarting your PC... =========="
-shutdown -r -t 30 -c "Your PC is about to restart in 30 seconds. Please save your work."
+Add-Type -AssemblyName System.Windows.Forms
+[System.Windows.Forms.MessageBox]::Show("Please restart your computer to apply changes.", "Restart Required", "OK", "Information")
+# shutdown -r -t 60 -c "Your PC is about to restart in 1 minute. Please save your work."
