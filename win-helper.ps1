@@ -23,7 +23,7 @@ if ((Get-Computerinfo).CsPCSystemType -eq "Mobile") {
 
     # Open battery report
     Write-Host "========== Opening battery report =========="
-    Start-Process -FilePath "msedge" -ArgumentList "$env:userprofile\Desktop\battery-report.html"
+    Start-Process -FilePath "$env:userprofile\Desktop\battery-report.html"
 }
 
 # Repair file or system image corruptions
