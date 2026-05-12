@@ -77,7 +77,7 @@ if ($Confirmation -eq 'y' -or $Confirmation -eq "yes" -or $Confirmation -eq '') 
 $Confirmation = Read-Host "Do you want to open disk cleanup for any additional cleaning? (Y/n)"
 if ($Confirmation -eq 'y' -or $Confirmation -eq "yes" -or $Confirmation -eq '') {
     Write-Host "========== Starting Disk Cleanup =========="
-Start-Process -FilePath "cleanmgr.exe" -Wait
+    Start-Process -FilePath "cleanmgr.exe" -Wait
 } else {
     Write-Host "Action skipped."
 }
